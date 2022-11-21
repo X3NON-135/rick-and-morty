@@ -1,7 +1,6 @@
 <div style="display: flex">
     <div style="float: left">
         <h1>
-            <br>
             <a href="https://www.adultswim.com/streams/rick-and-morty">
                 <img src="https://www.overlyanimated.com/wp-content/uploads/2018/02/unnamed2.png" style="height: 200px; margin: 10px auto 20px; display: block;">
             </a>
