@@ -4,34 +4,28 @@ services:
   db:
     image: 'postgres:15'
     container_name: db
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_DATABASE=$POSTGRES_DATABASE
+    ports:
+      - $POSTGRES_LOCAL_PORT:$POSTGRES_DOCKER_PORT
+
+  app:
+    depends_on:
+      - db
+    image: 'postgres/ricknmorty'
+    build: .
     env_file: ./.env
     ports:
-      - '5433:5432'
+      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
     environment:
-      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-      - POSTGRES_USER=$POSTGRES_USER
-      - POSTGRES_DB=$POSTGRES_DB
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U posrgres" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-    app:
-      depends_on:
-        - postgres
-      image: postgres/rick-and-morty
-      build: .
-      env_file: ./.env
-      ports:
-        - '6969:8080'
-
-      environment:
-        SPRING_APPLICATION_JSON: '{
-          "spring.datasource.url"      : "jdbc:postgresql://localhost:5432/$POSTGRES_DB,
-          "spring.datasource.username" : "$POSTGRES_USER",
-          "spring.datasource.password" : "$POSTGRES_PASSWORD",
-          "spring.jpa.properties.hibernate.dialect":"org.hibernate.dialect.PostgreSQL81Dialect",
-          "spring.jpa.hibernate.ddl-auto":"validate"
-        }'
-        JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+      SPRING_APPLICATION_JSON: '{
+      "spring.datasource.url":"jdbc:postgresql://db:$POSTGRES_DOCKER_PORT/$POSTGRES_DATABASE",
+      "spring.datasource.username":"$POSTGRES_USER",
+      "spring.datasource.password":"$POSTGRES_PASSWORD",
+      "spring.jpa.properties.hibernate.dialect":"org.hibernate.dialect.PostgreSQL81Dialect",
+      "spring.jpa.hibernate.ddl-auto":"update"
+    }'
