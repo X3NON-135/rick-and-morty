@@ -51,7 +51,7 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
     @Override
     public MovieCharacter getRandomCharacter() {
         long count = movieCharacterRepository.count();
-        long randomId = (long) (Math.random() * count);
+        long randomId = (long) (Math.random() * count) + 1;
         return movieCharacterRepository.findById(randomId).orElseThrow(() ->
                  new RuntimeException("Can't get Movie Character by id " + randomId));
     }
