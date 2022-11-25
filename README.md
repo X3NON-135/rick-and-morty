@@ -40,3 +40,13 @@ spring.jpa.properties.hibernate.dialect=DIALECT
 ```
 4) Start maven compiling code and packaging it to jar - run **mvn clean package**
 5) Run project with command ```docker-compose up```
+___
+
+# How to send GET methods
+* Open web-browser and write down ```http://localhost:8080/swagger-ui/#``` to open Swagger
+* or
+* Write into URL:
+```
+    http://localhost:8080/movie-characters/random
+    http://localhost:8080/movie-characters/by-name?name=Scar Rick
+```
