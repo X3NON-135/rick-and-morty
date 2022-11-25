@@ -8,7 +8,7 @@
     </div>
 </div>
 <div>
-    <h2 align="center">Simple mini-app for fans of famous sitcom "Rick and Morty", <br> which is using public API to get info about all characters</h2>
+    <h2 align="center">Simple online mini-app for fans of famous sitcom "Rick and Morty", <br> which is using public API to get info about all characters</h2>
 </div>
 
 # Functionality
@@ -26,9 +26,27 @@ Based on N-Tier architecture:
 * Maven
 * Spring Boot 2.7.5
 * Mockito
+* Cron  
 * Docker
 # Quick start
 1) Clone this repository
-2) Download image with Postgres 15-Alpine from Docker ```docker pull postgres:15-alpine```
-3) Download image with Project Rick and Morty from Docker ```docker pull octopy/rick-and-morty:latest```
-4) Run project with command ```docker-compose up```
+2) Download image with Project Rick and Morty from Docker ```docker pull octopy/rick-and-morty:latest```
+3) Set up necessary fields in ```application.properties```
+```
+spring.datasource.url=DB_URL
+spring.datasource.username=USER
+spring.datasource.password=PASSWORD
+spring.jpa.properties.hibernate.dialect=DIALECT
+```
+4) Start maven compiling code and packaging it to jar - run **mvn clean package**
+5) Run project with command ```docker-compose up```
+___
+
+# How to send GET methods
+* Open web-browser and write down ```http://localhost:8080/swagger-ui/#``` to open Swagger
+* or
+* Write into URL:
+```
+    http://localhost:8080/movie-characters/random
+    http://localhost:8080/movie-characters/by-name?name=Scar Rick
+```

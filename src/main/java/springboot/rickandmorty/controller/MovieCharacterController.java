@@ -24,13 +24,6 @@ public class MovieCharacterController {
         this.mapper = mapper;
     }
 
-    @GetMapping("/fetch")
-    @ApiOperation(value = "fetch all characters from API, sync and save it to DB")
-    public String syncAndSaveAllToDb() {
-        characterService.syncExternalCharacters();
-        return "Done!";
-    }
-
     @GetMapping("/random")
     @ApiOperation(value = "get random character")
     public Object getRandom() {
