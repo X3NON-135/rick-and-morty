@@ -26,9 +26,17 @@ Based on N-Tier architecture:
 * Maven
 * Spring Boot 2.7.5
 * Mockito
+* Cron  
 * Docker
 # Quick start
 1) Clone this repository
-2) Download image with Postgres 15-Alpine from Docker ```docker pull postgres:15-alpine```
-3) Download image with Project Rick and Morty from Docker ```docker pull octopy/rick-and-morty:latest```
-4) Run project with command ```docker-compose up```
+2) Download image with Project Rick and Morty from Docker ```docker pull octopy/rick-and-morty:latest```
+3) Set up necessary fields in ```application.properties```
+```
+spring.datasource.url=DB_URL
+spring.datasource.username=USER
+spring.datasource.password=PASSWORD
+spring.jpa.properties.hibernate.dialect=DIALECT
+```
+4) Start maven compiling code and packaging it to jar - run **mvn clean package**
+5) Run project with command ```docker-compose up```
