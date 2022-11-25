@@ -8,7 +8,7 @@
     </div>
 </div>
 <div>
-    <h2 align="center">Simple mini-app for fans of famous sitcom "Rick and Morty", <br> which is using public API to get info about all characters</h2>
+    <h2 align="center">Simple online mini-app for fans of famous sitcom "Rick and Morty", <br> which is using public API to get info about all characters</h2>
 </div>
 
 # Functionality
