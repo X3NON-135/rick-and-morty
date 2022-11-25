@@ -35,8 +35,7 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
 
     @PostConstruct
     @Scheduled(cron = "0 8 * * * ?")
-    @Override
-    public void syncExternalCharacters() {
+    private void syncExternalCharacters() {
         log.info("syncExternalCharacters method was invoked at " + LocalDateTime.now());
         ApiResponseDto apiResponseDto = httpClient.get(API_URL,
                 ApiResponseDto.class);
